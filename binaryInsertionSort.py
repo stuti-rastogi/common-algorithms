@@ -4,11 +4,17 @@ def binarySearch(arr, start, end, key):
         key should be inserted
     '''
     if start == end:
+        # Key is not in the sub array we are searching
+        # We want to return the position of insertion of key,
+        # so we need to check both left and right cases here
         if arr[start] < key:
             return start + 1
         else:
             return start
 
+    # This happens when the key is smaller than start of the array
+    # So in that case we return start
+    # The other boundary case never happens, because mid is always the lower int
     if start > end:
         return start
 
