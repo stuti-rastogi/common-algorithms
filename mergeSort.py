@@ -48,8 +48,9 @@ def mergeSimple(arr, start, mid, end):
     for i in range(sizeR):
         R[i] = arr[mid + 1 + i]
 
-    L[sizeL] = float('inf')
-    R[sizeR] = float('inf')
+    # sentinels
+    L[sizeL] = float("inf")
+    R[sizeR] = float("inf")
 
     i = 0; j = 0
     k = start
