@@ -29,12 +29,48 @@ def merge(arr, start, mid, end):
         arr[i] = temp[i - start]
 
 
+# Here we use sentinels to cover all elements
+# instead of the two extra while loops at the end
+# REFER CLRS # 31
+def mergeSimple(arr, start, mid, end):
+    sizeL = mid - start + 1
+    sizeR = end - mid
+
+    # +1 for the sentinels
+    L = [0] * (sizeL + 1)
+    R = [0] * (sizeR + 1)
+
+    # copy elements from start to mid inclusive from arr to L
+    for i in range(sizeL):
+        L[i] = arr[start + i]
+
+    # copy elements from mid+1 to end inclusive from arr to R
+    for i in range(sizeR):
+        R[i] = arr[mid + 1 + i]
+
+    L[sizeL] = float('inf')
+    R[sizeR] = float('inf')
+
+    i = 0; j = 0
+    k = start
+
+    # we know we are arranging the elements from start to end
+    while k <= end:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i += 1
+        else:
+            arr[k] = R[j]
+            j += 1
+        k += 1
+
+
 def mergeSortHelper(arr, start, end):
     if start < end:
         mid = (start + end) // 2
         mergeSortHelper(arr, start, mid)
         mergeSortHelper(arr, mid+1, end)
-        merge(arr, start, mid, end)
+        mergeSimple(arr, start, mid, end)
 
 
 def mergeSort(arr):
