@@ -5,7 +5,7 @@ MAXSIZE = 10
 class Stack:
     def __init__(self):
         self.top = -1
-        self.stack = [float('inf')] * MAXSIZE
+        self.stack = [float("inf")] * MAXSIZE
 
     def isEmpty(self):
         if self.top == -1:
@@ -53,4 +53,3 @@ if __name__ == "__main__":
     print ("Popping...")
     s.pop()
     s.print()
-
