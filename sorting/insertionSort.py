@@ -13,9 +13,9 @@ def insertionSort(arr):
 
     return
 
-
-# test
-arr = [5, 3, 0, 1, 4, 2]
-print ("Original array:\t{}".format(arr))
-insertionSort(arr)
-print ("Sorted array:\t{}".format(arr))
+if __name__ == "__main__":
+    # test
+    arr = [5, 3, 0, 1, 4, 2]
+    print ("Original array:\t{}".format(arr))
+    insertionSort(arr)
+    print ("Sorted array:\t{}".format(arr))
