@@ -39,7 +39,10 @@ class LinkedList:
             curr = curr.next
         if not curr:
             raise Exception("Node not found!")
-        prev.next = curr.next
+        if prev:
+            prev.next = curr.next
+        else:
+            self.head = curr.next
         del(curr)
 
     def search(self, k):
@@ -52,6 +55,16 @@ class LinkedList:
             curr = curr.next
         return curr
 
+    def reverse(self):
+        prev = None
+        curr = self.head
+        while curr:
+            nextNode = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nextNode
+        self.head = prev
+
     def print(self):
         curr = self.head
         while curr:
@@ -63,8 +76,9 @@ class LinkedList:
 if __name__ == "__main__":
     l = LinkedList()
 
-    for i in range(6):
+    for i in range(5):
         key = random.randint(0, 9)
+        # key = i
         node = Node(key)
         print ("Inserting {}...".format(key))
         l.insert(node)
@@ -75,7 +89,12 @@ if __name__ == "__main__":
     print ("Result of searching for 5: {}".format(l.search(5)))
     print ("Result of searching for 8: {}".format(l.search(8)))
 
-    print ("Deleting node with key 2...")
-    l.delete(Node(2))
+    print ("\nDeleting node with key 4...")
+    l.delete(Node(4))
+    print ("Linked list is: ", end="")
+    l.print()
+
+    print ("Reversing the list...")
+    l.reverse()
     print ("Linked list is: ", end="")
     l.print()
