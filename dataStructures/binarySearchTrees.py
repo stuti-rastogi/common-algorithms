@@ -102,10 +102,29 @@ class BinarySearchTree:
             y.right = z
 
     def delete(self, z):
-        pass
+        if not z.left:
+            self.transplant(z, z.right)
+        elif not z.right:
+            self.transplant(z, z.left)
+        else:
+            y = self.minimum(z.right)
+            if y.p != z:
+                self.transplant(y, y.right)
+                y.right = z.right
+                z.right.p = y
+            self.transplant(z, y)
+            y.left = z.left
+            z.left.p = y
 
     def transplant(self, u, v):
-        pass
+        if not u.p:
+            self.root = v
+        elif u == u.p.left:
+            u.p.left = v
+        else:
+            u.p.right = v
+        if v:
+            v.p = u.p
 
 
 if __name__ == "__main__":
@@ -154,3 +173,18 @@ if __name__ == "__main__":
     print ("Predecessor value of 18\t: {}".format(t.predecessor(t.search(18)).key))
 
     print ()
+
+    print ("Deleting node with no children (2)...")
+    t.delete(t.search(2))
+    t.preorderTraversal()
+    t.postorderTraversal()
+
+    print ("Deleting node with 1 child (5)...")
+    t.delete(t.search(5))
+    t.preorderTraversal()
+    t.postorderTraversal()
+
+    print ("Deleting node with 2 children (12)...")
+    t.delete(t.search(12))
+    t.preorderTraversal()
+    t.postorderTraversal()
