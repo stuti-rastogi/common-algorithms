@@ -52,23 +52,35 @@ class BinarySearchTree:
                 x = x.right
         return x
 
-    def maximum(self):
-        x = self.root
+    def maximum(self, x):
         while x.right:
             x = x.right
         return x
 
-    def minimum(self):
-        x = self.root
+    def minimum(self, x):
         while x.left:
             x = x.left
         return x
 
     def successor(self, x):
-        pass
+        if x.right:
+            return self.minimum(x.right)
+        else:
+            y = x.p
+            while y and x != y.left:
+                x = y
+                y = x.p
+            return y
 
     def predecessor(self, x):
-        pass
+        if x.left:
+            return self.maximum(x.left)
+        else:
+            y = x.p
+            while y and x != y.right:
+                x = y
+                y = x.p
+            return y
 
     def insert(self, z):
         y = None
@@ -99,7 +111,15 @@ class BinarySearchTree:
 if __name__ == "__main__":
     t = BinarySearchTree()
     print ("Searching for 12\t: {}\n".format(t.search(12)))
-    
+
+    # We will use the below tree to drive the code
+    #       12
+    #    /      \
+    #   5       18
+    #  / \     /  \
+    # 2   9   15  19
+    #           \
+    #            17
     t.insert(TreeNode(12))
     t.insert(TreeNode(5))
     t.insert(TreeNode(2))
@@ -113,8 +133,24 @@ if __name__ == "__main__":
     t.preorderTraversal()
     t.postorderTraversal()
 
-    print ("Searching for 12\t: {}\n".format(t.search(12)))
-    print ("Searching for 10\t: {}\n".format(t.search(10)))
+    print ("Searching for 12\t: {}".format(t.search(12)))
+    print ("Searching for 10\t: {}".format(t.search(10)))
 
-    print ("Maximum value in tree\t: {}\n".format(t.maximum().key))
-    print ("Minimum value in tree\t: {}\n".format(t.minimum().key))
+    print ()
+
+    print ("Maximum value in tree\t: {}".format(t.maximum(t.root).key))
+    print ("Minimum value in tree\t: {}".format(t.minimum(t.root).key))
+
+    print ()
+
+    print ("Successor value of 2\t: {}".format(t.successor(t.search(2)).key))
+    print ("Successor value of 12\t: {}".format(t.successor(t.search(12)).key))
+    print ("Successor value of 9\t: {}".format(t.successor(t.search(9)).key))
+
+    print ()
+
+    print ("Predecessor value of 15\t: {}".format(t.predecessor(t.search(15)).key))
+    print ("Predecessor value of 19\t: {}".format(t.predecessor(t.search(19)).key))
+    print ("Predecessor value of 18\t: {}".format(t.predecessor(t.search(18)).key))
+
+    print ()
