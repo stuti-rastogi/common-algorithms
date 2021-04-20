@@ -91,9 +91,7 @@ class BinarySearchTree:
                 x = x.left
             else:
                 x = x.right
-
         z.p = y
-
         if not y:
             self.root = z
         elif z.key < y.key:
