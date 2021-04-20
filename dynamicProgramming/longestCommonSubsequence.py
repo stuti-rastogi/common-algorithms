@@ -27,9 +27,8 @@ def lcs(x, y):
 if __name__ == "__main__":
     s1 = "ABCDGH"
     s2 = "AEDFHR"
+    print ("Length of LCS of {0} and {1}\t: {2}".format(s1, s2, lcs(s1, s2)))
 
     s3 = "AGGTAB"
     s4 = "GXTXAYB"
-
-    print ("Length of LCS of {0} and {1}\t: {2}".format(s1, s2, lcs(s1, s2)))
     print ("Length of LCS of {0} and {1}\t: {2}".format(s3, s4, lcs(s3, s4)))
