@@ -14,7 +14,7 @@ class GraphSearch(Graph):
 
 		q.enqueue(s)
 		visited.add(s)
-		print ("BFS: ", end="")
+		print ("\nBFS: ", end="")
 
 		while not q.isEmpty():
 			u = q.dequeue()

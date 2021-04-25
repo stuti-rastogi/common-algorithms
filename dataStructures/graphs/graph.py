@@ -31,4 +31,6 @@ class Graph:
 
 
 	def print(self):
-		print (self.adj)
+		print ("\nGraph:")
+		for u in self.adj:
+			print ("{} : {}".format(u, self.adj[u]))
