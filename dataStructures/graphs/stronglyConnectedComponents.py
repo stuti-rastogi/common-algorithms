@@ -1,9 +1,3 @@
-import os, sys
-currentdir = os.path.dirname(os.path.realpath(__file__))
-parentdir = os.path.dirname(currentdir)
-projectdir = os.path.dirname(parentdir)
-sys.path.append(projectdir)
-
 from dataStructures.graphs.graphSearch import GraphSearch
 from dataStructures.stacks import Stack
 
