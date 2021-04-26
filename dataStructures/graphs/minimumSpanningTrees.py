@@ -108,30 +108,38 @@ class WeightedGraph:
 			Prints the MST array containing edges of an MST
 		'''
 		from dataStructures.minPriorityQueue import MinPriorityQueue
-		pass
 
-		# lenV = len(self.vertices)
-		# # initialize keys of all vertices and take vertex 0 as root
-		# key = [float('inf')] * lenV
-		# key[self.vertices[0]] = 0
+		lenV = len(self.vertices)
 
-		# parent = [-1] * lenV
-		# q = MinPriorityQueue(key)
-		# q.printHeap()
+		# MST will contain edges (parent[i], i)
+		parent = [-1] * lenV
+		# to store the weight of the edge (parent[i], i) - to calculate MST weight
+		weight = [0] * lenV
+		# Initializing (key, vertex) tuples for the priority queue
+		queueArray = []
+		for v in self.vertices:
+			queueArray.append((float('inf'), v))
+		q = MinPriorityQueue(queueArray)
+		# Initializing vertex 0 as root
+		q.heapDecreaseKey(self.vertices[0], 0)
 
-		# while not q.isEmpty():
-		# 	u = q.heapExtractMin()
-		# 	for edge in g.adj[u]:
-		# 		v, w = edge
-		# 		if v in q.heap and w < q.heap[v]:
-		# 			parent[v] = u
-		# 			q.heapDecreaseKey(v, w)
+		while not q.isEmpty():
+			_, u = q.heapExtractMin()
+			for edge in g.adj[u]:
+				v, w = edge
+				if q.containsItem(v) and w < q.itemKey(v):
+					parent[v] = u
+					weight[v] = w
+					q.heapDecreaseKey(v, w)
 
 
-		# # printing the MST
-		# print ("\Prim MST:")
-		# for i in range(1, lenV):
-		# 	print ("{} --- {}".format(parent[i], i))
+		# printing the MST
+		print ("\nPrim MST:")
+		mstWeight = 0
+		for i in range(1, lenV):
+			print ("{} --- {} : {}".format(parent[i], i, weight[i]))
+			mstWeight += weight[i]
+		print ("MST Weight: {}".format(mstWeight))
 
 
 	def print(self):

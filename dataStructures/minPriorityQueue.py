@@ -104,6 +104,14 @@ class MinPriorityQueue():
 			return True
 		return False
 
+	def itemKey(self, item):
+		'''
+			Return the current priority of a given item
+		'''
+		if self.containsItem(item):
+			return self.heap[self.index[item]][0]
+		raise Exception("Item not in the heap.")
+
 	def printHeap(self):
 		print (self.heap)
 
@@ -128,4 +136,8 @@ if __name__ == "__main__":
 	print (heap.index)
 
 	print ("\n2 in the priority queue: {}".format(heap.containsItem(2)))
-	print ("\n6 in the priority queue: {}".format(heap.containsItem(6)))
+	print ("6 in the priority queue: {}".format(heap.containsItem(6)))
+
+	print ("\nPriority of item 4: {}".format(heap.itemKey(4)))
+	print ("Priority of item 7: {}".format(heap.itemKey(7)))
+	print ("Priority of item 2: {}".format(heap.itemKey(2)))
