@@ -45,7 +45,7 @@ class WeightedGraph:
 	def kruskalMST(self):
 		'''
 			Kruskal's Algorithm to find the MST
-			Returns the MST array containing edges of an MST
+			Prints the MST array containing edges of an MST
 		'''
 		def findRoot(parent, v):
 			'''
@@ -93,7 +93,7 @@ class WeightedGraph:
 			edge += 1
 
 		# printing the MST
-		print ("\nMST:")
+		print ("\nKruskal MST:")
 		mstWeight = 0
 		for edge in MST:
 			u, v, w = edge
@@ -102,12 +102,45 @@ class WeightedGraph:
 		print ("MST Weight: {}".format(mstWeight))
 
 
+	def primMST(self):
+		'''
+			Prim's Algorithm to find the MST
+			Prints the MST array containing edges of an MST
+		'''
+		from dataStructures.minPriorityQueue import MinPriorityQueue
+		pass
+
+		# lenV = len(self.vertices)
+		# # initialize keys of all vertices and take vertex 0 as root
+		# key = [float('inf')] * lenV
+		# key[self.vertices[0]] = 0
+
+		# parent = [-1] * lenV
+		# q = MinPriorityQueue(key)
+		# q.printHeap()
+
+		# while not q.isEmpty():
+		# 	u = q.heapExtractMin()
+		# 	for edge in g.adj[u]:
+		# 		v, w = edge
+		# 		if v in q.heap and w < q.heap[v]:
+		# 			parent[v] = u
+		# 			q.heapDecreaseKey(v, w)
+
+
+		# # printing the MST
+		# print ("\Prim MST:")
+		# for i in range(1, lenV):
+		# 	print ("{} --- {}".format(parent[i], i))
+
+
 	def print(self):
 		print ("\nGraph:")
 		for u in self.adj:
 			print ("{} : {}".format(u, self.adj[u]))
 
 
+# testing code
 if __name__ == "__main__":
 	g = WeightedGraph()
 	for i in range(9):
@@ -130,3 +163,4 @@ if __name__ == "__main__":
 
 	g.print()
 	g.kruskalMST()
+	g.primMST()
