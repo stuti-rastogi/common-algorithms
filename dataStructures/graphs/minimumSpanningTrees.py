@@ -101,12 +101,6 @@ class MST(WeightedGraph):
 		print ("MST Weight: {}".format(mstWeight))
 
 
-	def print(self):
-		print ("\nGraph:")
-		for u in self.adj:
-			print ("{} : {}".format(u, self.adj[u]))
-
-
 # testing code
 if __name__ == "__main__":
 	g = MST()

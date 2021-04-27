@@ -1,6 +1,6 @@
 class MinPriorityQueue():
 	'''
-		Min-Priority-Queue data structure, to be used in Prim's Algorithm for MST
+		Min-Priority-Queue data structure, to be used in Prim's Algorithm for MST and Dijkstra's Algorithm
 		Not implementing all functions - only those needed in Prim's
 	'''
 	def __init__(self, arr):

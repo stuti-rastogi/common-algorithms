@@ -58,3 +58,9 @@ class WeightedGraph:
 
 		self.edges.append(edge)
 		self.adj[edge[0]].append(tuple(edge[1:]))
+
+
+	def print(self):
+		print ("\nGraph:")
+		for u in self.adj:
+			print ("{} : {}".format(u, self.adj[u]))
