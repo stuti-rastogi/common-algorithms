@@ -1,47 +1,7 @@
-class WeightedGraph:
-	'''
-		Redefining graph class, not using dataStructures.graphs.Graph
-		Want to use weighted undirected graphs for MST
-		Vertices stored in G.vertices, Vertices are just ints
-		Edges stored in G.edges, in the form (u, v, w)
-		Adjacency list stored in G.adj in the form: {u1: [(v1, w1), (v2, w2), ...], u2:[...], ...}
-	'''
+from weightedGraph import WeightedGraph
+from dataStructures.minPriorityQueue import MinPriorityQueue
 
-	def __init__(self):
-		self.adj = {}
-		self.vertices = []
-		self.edges = []
-
-
-	def addVertex(self, v):
-		if v not in self.vertices:
-			self.vertices.append(v)
-			self.adj[v] = []
-		else:
-			print ("WARNING: Duplicate vertex added. Skipping...")
-
-
-	def addEdge(self, edge):
-		'''
-			Args:
-				edge: tuple (u, v, w) - undirected edge between u and v vertices of weight w
-			Function:
-				Makes three updates:
-					1. adds (u, v, w) to g.edges
-					2. adds (v, w) to g.adj[u]
-					3. adds (u, w) to g.adj[v]
-		'''
-		if type(edge) != tuple or len(edge) != 3:
-			raise Exception("Badly formatted edge. Expected tuple of length 3.")
-
-		if edge[0] not in self.vertices or edge[1] not in self.vertices:
-			raise Exception("Edge between non-existing vertices. Please add vertex first.")
-
-		self.edges.append(edge)
-		self.adj[edge[0]].append(tuple(edge[1:]))
-		self.adj[edge[1]].append(tuple([edge[0], edge[2]]))
-
-
+class MST(WeightedGraph):
 	def kruskalMST(self):
 		'''
 			Kruskal's Algorithm to find the MST
@@ -107,7 +67,6 @@ class WeightedGraph:
 			Prim's Algorithm to find the MST
 			Prints the MST array containing edges of an MST
 		'''
-		from dataStructures.minPriorityQueue import MinPriorityQueue
 
 		lenV = len(self.vertices)
 
@@ -150,24 +109,24 @@ class WeightedGraph:
 
 # testing code
 if __name__ == "__main__":
-	g = WeightedGraph()
+	g = MST()
 	for i in range(9):
 		g.addVertex(i)
 
-	g.addEdge((0, 1, 4))
-	g.addEdge((1, 2, 8))
-	g.addEdge((2, 3, 7))
-	g.addEdge((3, 4, 9))
-	g.addEdge((4, 5, 10))
-	g.addEdge((5, 6, 2))
-	g.addEdge((6, 7, 1))
-	g.addEdge((7, 0, 8))
-	g.addEdge((1, 7, 11))
-	g.addEdge((2, 8, 2))
-	g.addEdge((8, 7, 7))
-	g.addEdge((8, 6, 6))
-	g.addEdge((2, 5, 4))
-	g.addEdge((3, 5, 14))
+	g.addUndirectedEdge((0, 1, 4))
+	g.addUndirectedEdge((1, 2, 8))
+	g.addUndirectedEdge((2, 3, 7))
+	g.addUndirectedEdge((3, 4, 9))
+	g.addUndirectedEdge((4, 5, 10))
+	g.addUndirectedEdge((5, 6, 2))
+	g.addUndirectedEdge((6, 7, 1))
+	g.addUndirectedEdge((7, 0, 8))
+	g.addUndirectedEdge((1, 7, 11))
+	g.addUndirectedEdge((2, 8, 2))
+	g.addUndirectedEdge((8, 7, 7))
+	g.addUndirectedEdge((8, 6, 6))
+	g.addUndirectedEdge((2, 5, 4))
+	g.addUndirectedEdge((3, 5, 14))
 
 	g.print()
 	g.kruskalMST()
