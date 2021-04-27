@@ -21,6 +21,9 @@ def topologicalSort_dfsHelper(g, u, visited, stack):
 
 
 def topologicalSort_kahn(g):
+	'''
+		g is an unweighted directed graph
+	'''
 	inDegree = [0] * len(g.vertices)
 	visitedCnt = 0
 	topologicalSort = []

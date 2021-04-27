@@ -1,3 +1,5 @@
+from dataStructures.queues import Queue
+
 class WeightedGraph:
 	'''
 		Want to use weighted undirected graphs for MST and weighted directed graphs for SSSP
@@ -58,6 +60,40 @@ class WeightedGraph:
 
 		self.edges.append(edge)
 		self.adj[edge[0]].append(tuple(edge[1:]))
+
+
+	def topologicalSort(self):
+		'''
+			TopologicalSort using Kahn's algorithm for weighted graph
+		'''
+		inDegree = [0] * len(self.vertices)
+		visitedCnt = 0
+		topologicalSort = []
+
+		for u in self.adj:
+			for (v, _) in self.adj[u]:
+				inDegree[v] += 1
+
+		q = Queue(len(self.vertices))
+
+		for u in self.vertices:
+			if inDegree[u] == 0:
+				q.enqueue(u)
+
+		while not q.isEmpty():
+			u = q.dequeue()
+			topologicalSort.append(u)
+			visitedCnt += 1
+
+			for (v, _) in self.adj[u]:
+				inDegree[v] -= 1
+				if inDegree[v] == 0:
+					q.enqueue(v)
+
+		if visitedCnt != len(self.vertices):
+			raise Exception("Topological Sort not possible, cycle found")
+
+		return topologicalSort
 
 
 	def print(self):
