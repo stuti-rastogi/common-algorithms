@@ -17,7 +17,7 @@ class SSSP(WeightedGraph):
     def _initializeSSSP(self, s):
         lenV = len(self.vertices)
         self.distance = [float('inf')] * lenV
-        self.distance[self.vertices[0]] = 0
+        self.distance[s] = 0
         self.parent = [None] * lenV
 
 
@@ -60,8 +60,8 @@ class SSSP(WeightedGraph):
             if self.distance[v] > (self.distance[u] + w):
                 raise Exception("Negative-weight cycle found. SSSP not defined.")
 
-        print ("\nOutput: ")
-        self._printPaths(s)
+        # This is needed by Johnson's algorithm for apsp
+        return self.distance
 
 
     def dijkstra(self, s):
@@ -79,8 +79,8 @@ class SSSP(WeightedGraph):
                     self._relax(u, v, w)
                     q.heapDecreaseKey(v, self.distance[v])
 
-        print ("\nOutput: ")
-        self._printPaths(s)
+        # This is needed by Johnson's algorithm for apsp
+        return self.distance
 
 
     def ssspInDag(self, s):
@@ -90,15 +90,13 @@ class SSSP(WeightedGraph):
             for (v, w) in self.adj[u]:
                 self._relax(u, v, w)
 
-        print ("\nOutput: ")
-        self._printPaths(s)
 
 
 # testing code
 if __name__ == "__main__":
     # Creating the graphs used to test the algorithm
-    negativeWeightGraph  = SSSP()					# for Bellman-Ford
-    positiveWeightGraph = SSSP()					# for Dijkstra
+    negativeWeightGraph  = SSSP()                   # for Bellman-Ford
+    positiveWeightGraph = SSSP()                    # for Dijkstra
     dag = SSSP()
 
     for i in range(5):
@@ -131,7 +129,7 @@ if __name__ == "__main__":
     positiveWeightGraph.addDirectedEdge((4, 2, 6))
 
     # Graph from CLRS #656
-    dag.addVertex(5)				# We added vertices 0-4 before
+    dag.addVertex(5)                    # We added vertices 0-4 before
     dag.addDirectedEdge((0, 2, 2))
     dag.addDirectedEdge((1, 0, 5))
     dag.addDirectedEdge((0, 3, 6))
@@ -147,16 +145,22 @@ if __name__ == "__main__":
     print ("============")
     negativeWeightGraph.print()
     negativeWeightGraph.bellmanFord(0)
+    print ("\nOutput: ")
+    negativeWeightGraph._printPaths(0)
     print ("\n----------------------------------------------")
 
     print ("\nDIJKSTRA")
     print ("========")
     positiveWeightGraph.print()
     positiveWeightGraph.dijkstra(0)
+    print ("\nOutput: ")
+    positiveWeightGraph._printPaths(0)
     print ("\n----------------------------------------------")
 
     print ("\nSSP IN DAG")
     print ("==========")
     dag.print()
     dag.ssspInDag(0)
+    print ("\nOutput: ")
+    dag._printPaths(0)
     print ("\n----------------------------------------------")

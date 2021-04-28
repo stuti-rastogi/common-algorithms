@@ -23,12 +23,13 @@ class DenseWeightedGraph:
         self.adj[u][v] = w
 
     def print(self):
-        print ("\nGraph Adjacency Matrix:")
-        self.printMatrix(self.adj, self.v)
+        print ("\nGraph:")
+        printMatrix(self.adj, self.v)
 
-    def printMatrix(self, mat, n):
-        '''
-            Print square matrix "mat" of dimension n x n
-        '''
-        for i in range(n):
-            print ("\t".join(map(str, mat[i])))
+
+def printMatrix(mat, n):
+    '''
+        Print square matrix "mat" of dimension n x n
+    '''
+    for i in range(n):
+        print ("\t".join(map(str, mat[i])))

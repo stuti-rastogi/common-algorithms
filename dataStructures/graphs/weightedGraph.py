@@ -65,6 +65,7 @@ class WeightedGraph:
     def topologicalSort(self):
         '''
             TopologicalSort using Kahn's algorithm for weighted graph
+            Required by SSSP for DAG
         '''
         inDegree = [0] * len(self.vertices)
         visitedCnt = 0
@@ -94,6 +95,18 @@ class WeightedGraph:
             raise Exception("Topological Sort not possible, cycle found")
 
         return topologicalSort
+
+
+    def removeVertex(self, v):
+        '''
+            Remove vertex v from graph
+            Also remove any edges to/from vertex v
+        '''
+        self.vertices.remove(v)
+        self.adj.pop(v)
+        self.edges[:] = [edge for edge in self.edges if edge[0] != v and edge[1] != v]
+        for u in self.adj:
+            self.adj[u][:] = [edge for edge in self.adj[u] if edge[0] != v]
 
 
     def print(self):
