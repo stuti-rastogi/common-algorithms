@@ -5,7 +5,6 @@
 # Denominations: [6, 4, 1]
 # N = 8
 # Output = 2 (2 coins of 4)
-MAXSIZE = 10
 
 
 def coinChangeRec(d, n, N):
