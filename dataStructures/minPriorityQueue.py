@@ -1,13 +1,13 @@
 class MinPriorityQueue():
-    '''
+    """
         Min-Priority-Queue data structure, to be used in Prim's Algorithm for MST and Dijkstra's Algorithm
         Not implementing all functions - only those needed in Prim's
-    '''
+    """
     def __init__(self, arr):
-        '''
+        """
             arr - The array containing the tuples (priority, item) to be used for heap
             heapSize - The maximum size of the heap
-        '''
+        """
         self.heapSize = len(arr)
         self.heap = arr
         # maintains item -> index relation
@@ -17,37 +17,37 @@ class MinPriorityQueue():
         self.buildMinHeap(arr)
 
     def _parent(self, i):
-        '''
+        """
             Returns the parent of node at index i
-        '''
+        """
         return (i-1) // 2
 
     def _left(self, i):
-        '''
+        """
             Returns the index of the left child of node at index i
-        '''
+        """
         return 2*i + 1
 
     def _right(self, i):
-        '''
+        """
             Returns the index of the left child of node at index i
-        '''
+        """
         return 2*i + 2
 
     def buildMinHeap(self, arr):
-        '''
+        """
             Adds the elements of arr into a heap satisfying the min-heap property
             Stores the minHeap in self.heap
-        '''
+        """
         # i needs to go from the last node with children to 0
         # so starting value of i is parent(n-1) = (n-1-1)//2 = n//2 - 1
         for i in range (self.heapSize//2 - 1, -1, -1):
             self._minHeapify(i)
 
     def _minHeapify(self, i):
-        '''
-            Restores the max-heap property at the subtree rooted at node i
-        '''
+        """
+            Restores the min-heap property at the subtree rooted at node i
+        """
         l = self._left(i)
         r = self._right(i)
 
@@ -79,12 +79,12 @@ class MinPriorityQueue():
         return self.heap.pop()             # actually removing the element
 
     def heapDecreaseKey(self, item, key):
-        '''
+        """
             Decrease the priority of item to key (index not specified)
-        '''
+        """
         i = self.index[item]
         if key > self.heap[i][0]:
-            raise Exception("New key cannot be less than current key")
+            raise Exception("New key cannot be greater than current key")
 
         # optimised implementation - CLRS Ex 6.5-6
         while i > 0 and self.heap[self._parent(i)][0] > key:
@@ -105,9 +105,9 @@ class MinPriorityQueue():
         return False
 
     def itemKey(self, item):
-        '''
+        """
             Return the current priority of a given item
-        '''
+        """
         if self.containsItem(item):
             return self.heap[self.index[item]][0]
         raise Exception("Item not in the heap.")
